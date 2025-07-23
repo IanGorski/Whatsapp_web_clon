@@ -9,7 +9,6 @@ Este proyecto fue desarrollado como trabajo final del curso de Frontend UTN, con
 - **React 19.1.0** - Framework principal de JavaScript
 - **Vite 7.0.4** - Herramienta de build y desarrollo
 - **React Router DOM 6.x** - Enrutamiento y navegación SPA
-- **React Icons 5.5.0** - Biblioteca de iconos
 - **CSS Modules** - Estilos modulares y encapsulados
 - **ESLint** - Linting y calidad de código
 
