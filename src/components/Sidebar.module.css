@@ -209,7 +209,7 @@
     text-overflow: ellipsis;
 }
 
-/* Responsive */
+/*--*/
 @media (max-width: 768px) {
     .menuItem {
         height: 45px;

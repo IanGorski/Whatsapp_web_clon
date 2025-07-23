@@ -437,7 +437,7 @@
   }
 }
 
-/* Tablets (769px+) */
+/*--*/
 @media (min-width: 769px) {
   .messageComposer {
     padding: 10px 16px;

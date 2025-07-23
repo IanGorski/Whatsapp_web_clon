@@ -107,7 +107,7 @@
 
 /* Responsive */
 
-/*---*/
+/*--*/
 @media (max-width: 320px) {
   .leftPanel {
     width: calc(100vw - 50px);
@@ -147,7 +147,7 @@
   }
 }
 
-/*---*/
+/*--*/
 @media (min-width: 321px) and (max-width: 480px) {
   .leftPanel {
     width: calc(100vw - 55px);
@@ -187,7 +187,7 @@
   }
 }
 
-/*---*/
+/*--*/
 @media (min-width: 481px) and (max-width: 768px) {
   .leftPanel {
     width: calc(100vw - 60px);
@@ -227,7 +227,7 @@
   }
 }
 
-/*---*/
+/*--*/
 @media (min-width: 769px) and (max-width: 1024px) {
   .leftPanel {
     width: 350px;
@@ -244,7 +244,7 @@
   }
 }
 
-/*---*/
+/*--*/
 @media (min-width: 1025px) {
   .leftPanel {
     width: 400px;
