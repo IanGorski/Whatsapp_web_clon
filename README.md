@@ -44,24 +44,41 @@ Este proyecto fue desarrollado como trabajo final del curso de Frontend UTN, con
 ```
 src/
 ├── components/          # Componentes globales reutilizables
-│   └── Sidebar.jsx     # Navegación principal
+│   ├── Sidebar.jsx     # Navegación principal
+│   └── Sidebar.module.css
 ├── context/            # Context API para estado global
 │   └── AppContext.jsx  # Proveedor de estado de la aplicación
+├── hooks/              # Custom hooks reutilizables
+│   └── useEscapeKey.js # Hook para manejo de tecla ESC
 ├── pages/              # Páginas principales con rutas
 │   ├── ChatPage.jsx    # Página principal de chats
+│   ├── ChatPage.module.css
 │   ├── ConversationPage.jsx  # Chat específico (/chat/:id)
+│   ├── ConversationPage.module.css
 │   ├── SettingsPage.jsx      # Configuración de la app
+│   ├── SettingsPage.module.css
 │   ├── StatusPage.jsx        # Estados de WhatsApp
-│   └── ComingSoonPage.jsx    # Páginas en desarrollo
+│   ├── StatusPage.module.css
+│   ├── ComingSoonPage.jsx    # Páginas en desarrollo
+│   └── ComingSoonPage.module.css
 ├── panels/             # Paneles principales de la UI
 │   ├── LeftPanel.jsx   # Lista de conversaciones
-│   └── ConversationPanel.jsx # Panel de chat activo
+│   ├── LeftPanel.module.css
+│   ├── ConversationPanel.jsx # Panel de chat activo
+│   └── ConversationPanel.module.css
 ├── ui/                 # Componentes de interfaz específicos
 │   ├── MessageList.jsx      # Lista de mensajes
+│   ├── MessageList.module.css
 │   ├── MessageComposer.jsx  # Compositor de mensajes
+│   ├── MessageComposer.module.css
 │   ├── SearchBar.jsx        # Barra de búsqueda
-│   └── UserCard.jsx         # Tarjeta de contacto/chat
-└── App.jsx             # Componente raíz con Router
+│   ├── SearchBar.module.css
+│   ├── UserCard.jsx         # Tarjeta de contacto/chat
+│   └── UserCard.module.css
+├── App.jsx             # Componente raíz con Router
+├── App.css             # Estilos globales del componente raíz
+├── main.jsx            # Punto de entrada de la aplicación
+└── index.css           # Estilos globales base
 ```
 
 ## 🎯 Rutas Implementadas
