@@ -41,10 +41,10 @@ function App() {
                 path="/starred" 
                 element={<ComingSoonPage title="Mensajes Destacados" emoji="⭐" />} 
               />
-              <Route 
-                path="/archived" 
-                element={<ComingSoonPage title="Archivar Chats" emoji="�" />} 
-              />
+          <Route 
+            path="/archived" 
+            element={<ComingSoonPage title="Archivar Chats" emoji="📁" />} 
+          />
               <Route 
                 path="/profile" 
                 element={<ComingSoonPage title="Perfil" emoji="👤" />} 
