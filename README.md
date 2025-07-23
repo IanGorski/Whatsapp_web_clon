@@ -1,4 +1,4 @@
-[Ver proyecto en vivo](https://whatsapp-web-clon.vercel.app) - 
+[Ver proyecto en vivo](https://whatsapp-web-clon.vercel.app) - *Desplegado en Vercel*
 
 ## 📋 Descripción del Desafío
 
