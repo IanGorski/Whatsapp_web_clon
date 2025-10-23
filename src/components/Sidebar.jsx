@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Sidebar.module.css";
+import ChatIcon from '@mui/icons-material/Chat';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import CallIcon from '@mui/icons-material/Call';
+import StarIcon from '@mui/icons-material/Star';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import SettingsIcon from '@mui/icons-material/Settings';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -46,7 +53,9 @@ const Sidebar = () => {
         onClick={() => handleMenuClick("/chats")}
         title="Chats"
       >
-        <span className={styles.menuIcon}>💬</span>
+        <span className={styles.menuIcon}>
+          <ChatIcon sx={{ fontSize: 24 }} />
+        </span>
         {isExpanded && <span className={styles.menuLabel}>Chats</span>}
       </button>
 
@@ -58,7 +67,9 @@ const Sidebar = () => {
         onClick={() => handleMenuClick("/status")}
         title="Estados"
       >
-        <span className={styles.menuIcon}>📊</span>
+        <span className={styles.menuIcon}>
+          <BarChartIcon sx={{ fontSize: 24 }} />
+        </span>
         {isExpanded && <span className={styles.menuLabel}>Estados</span>}
       </button>
 
@@ -70,7 +81,9 @@ const Sidebar = () => {
         onClick={() => handleMenuClick("/calls")}
         title="Llamadas"
       >
-        <span className={styles.menuIcon}>📞</span>
+        <span className={styles.menuIcon}>
+          <CallIcon sx={{ fontSize: 24 }} />
+        </span>
         {isExpanded && <span className={styles.menuLabel}>Llamadas</span>}
       </button>
 
@@ -85,7 +98,9 @@ const Sidebar = () => {
         onClick={() => handleMenuClick("/starred")}
         title="Mensajes destacados"
       >
-        <span className={styles.menuIcon}>⭐</span>
+        <span className={styles.menuIcon}>
+          <StarIcon sx={{ fontSize: 24 }} />
+        </span>
         {isExpanded && <span className={styles.menuLabel}>Destacados</span>}
       </button>
 
@@ -97,7 +112,9 @@ const Sidebar = () => {
         onClick={() => handleMenuClick("/archived")}
         title="Archivar Chats"
       >
-        <span className={styles.menuIcon}>📁</span>
+        <span className={styles.menuIcon}>
+          <ArchiveIcon sx={{ fontSize: 24 }} />
+        </span>
         {isExpanded && <span className={styles.menuLabel}>Archivar Chats</span>}
       </button>
 
@@ -109,7 +126,9 @@ const Sidebar = () => {
         onClick={() => handleMenuClick("/settings")}
         title="Ajustes"
       >
-        <span className={styles.menuIcon}>⚙️</span>
+        <span className={styles.menuIcon}>
+          <SettingsIcon sx={{ fontSize: 24 }} />
+        </span>
         {isExpanded && <span className={styles.menuLabel}>Ajustes</span>}
       </button>
 
@@ -121,7 +140,9 @@ const Sidebar = () => {
         onClick={() => handleMenuClick("/profile")}
         title="Perfil"
       >
-        <span className={styles.menuIcon}>👤</span>
+        <span className={styles.menuIcon}>
+          <PersonIcon sx={{ fontSize: 24 }} />
+        </span>
         {isExpanded && <span className={styles.menuLabel}>Perfil</span>}
       </button>
     </div>
