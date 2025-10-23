@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './SearchBar.module.css';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const SearchBar = ({ onSearch, placeholder = "Search..." }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -30,7 +31,7 @@ const SearchBar = ({ onSearch, placeholder = "Search..." }) => {
           onClick={clearSearch}
           className={styles.clearButton}
         >
-          ×
+          <ClearIcon sx={{ fontSize: 18, color: '#54656f' }} />
         </button>
       )}
     </div>
