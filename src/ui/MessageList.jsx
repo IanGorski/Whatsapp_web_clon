@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './MessageList.module.css';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, onDeleteMessage }) => {
   const messageRefs = useRef({});
@@ -87,7 +88,7 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
                 onClick={() => handleDeleteMessage(message.id)}
                 title="Eliminar mensaje"
               >
-                🗑️
+                <DeleteIcon sx={{ fontSize: 18, color: '#54656f' }} />
               </button>
             </div>
           );
