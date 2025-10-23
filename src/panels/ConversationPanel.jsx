@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import styles from './ConversationPanel.module.css';
 import MessageList from '../ui/MessageList';
 import MessageComposer from '../ui/MessageComposer';
+import CallIcon from '@mui/icons-material/Call';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -101,14 +107,18 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
           </div>
         </div>
         <div className={styles.headerActions}>
-          <button className={styles.actionButton} onClick={handleIconClick}>📞</button>
-          <button className={styles.actionButton} onClick={handleIconClick}>📹</button>
+          <button className={styles.actionButton} onClick={handleIconClick}>
+            <CallIcon sx={{ fontSize: 20 }} />
+          </button>
+          <button className={styles.actionButton} onClick={handleIconClick}>
+            <VideocamIcon sx={{ fontSize: 20 }} />
+          </button>
           <button 
             className={styles.actionButton}
             onClick={toggleSearch}
             title="Buscar en chat"
           >
-            🔍
+            <SearchIcon sx={{ fontSize: 20 }} />
           </button>
         </div>
       </div>
@@ -138,7 +148,7 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
                   disabled={totalMatches === 0}
                   title="Resultado anterior"
                 >
-                  ▲
+                  <KeyboardArrowUpIcon sx={{ fontSize: 16 }} />
                 </button>
                 <button 
                   className={styles.navButton}
@@ -146,7 +156,7 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
                   disabled={totalMatches === 0}
                   title="Siguiente resultado"
                 >
-                  ▼
+                  <KeyboardArrowDownIcon sx={{ fontSize: 16 }} />
                 </button>
               </div>
             )}
@@ -155,7 +165,7 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
               className={styles.closeSearchButton}
               onClick={toggleSearch}
             >
-              ✕
+              <CloseIcon sx={{ fontSize: 18 }} />
             </button>
           </div>
         </div>
