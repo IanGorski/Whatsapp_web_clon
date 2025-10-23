@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './UserCard.module.css';
+import PushPinIcon from '@mui/icons-material/PushPin';
+import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 
 const UserCard = ({ user, onClick, isChat = false }) => {
   return (
@@ -10,17 +12,31 @@ const UserCard = ({ user, onClick, isChat = false }) => {
       <div className={styles.userInfo}>
         <div className={styles.topRow}>
           <h4>{user?.name || 'Unknown User'}</h4>
-          {isChat && <span className={styles.time}>{user?.time}</span>}
+          <div className={styles.iconContainer}>
+            {isChat && user?.pinned && (
+              <span className={styles.pinnedIcon}>
+                <PushPinIcon sx={{ fontSize: 18, color: '#54656f' }} />
+              </span>
+            )}
+            {isChat && <span className={styles.time}>{user?.time}</span>}
+          </div>
         </div>
         <div className={styles.bottomRow}>
           <p className={styles.lastMessage}>
             {isChat ? user?.lastMessage : user?.status || 'en línea'}
           </p>
-          {isChat && user?.unreadCount > 0 && (
-            <div className={styles.unreadBadge}>
-              {user.unreadCount}
-            </div>
-          )}
+          <div className={styles.badgeContainer}>
+            {isChat && user?.muted && (
+              <span className={styles.mutedIcon}>
+                <NotificationsOffIcon sx={{ fontSize: 18, color: '#54656f' }} />
+              </span>
+            )}
+            {isChat && user?.unreadCount > 0 && (
+              <div className={styles.unreadBadge}>
+                {user.unreadCount}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
