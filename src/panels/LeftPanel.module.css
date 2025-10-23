@@ -47,6 +47,9 @@
   transition: background-color 0.18s, color 0.18s;
   outline: none;
   box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .actionButton:focus {
@@ -250,4 +253,71 @@
     width: 400px;
     min-width: 380px;
   }
+}
+
+/* Estilos para el menú contextual */
+.contextMenu {
+  position: absolute;
+  width: 200px; /* Tamaño ajustado según la captura */
+  padding: 8px 0; /* Espaciado más amplio */
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1000;
+  margin: 0;
+  overflow: hidden;
+}
+
+.contextMenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contextMenu li {
+  font-size: 14px; /* Tamaño de fuente ajustado */
+  padding: 8px 16px; /* Espaciado más amplio */
+  cursor: pointer;
+  color: #111b21;
+  transition: background-color 0.2s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contextMenu li:hover {
+  background-color: #f0f2f5;
+}
+
+.menuItemWithSubmenu {
+  position: relative;
+}
+
+.subMenu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 0;
+  width: 180px;
+  z-index: 1001;
+  list-style: none;
+  margin: 0;
+}
+
+.subMenuItem {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #111b21;
+  transition: background-color 0.2s;
+}
+
+.subMenuItem:hover {
+  background-color: #f0f2f5;
 }

@@ -67,6 +67,9 @@
   transition: background-color 0.18s, color 0.18s;
   outline: none;
   box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .actionButton:focus {
