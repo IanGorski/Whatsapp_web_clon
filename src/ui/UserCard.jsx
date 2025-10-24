@@ -205,7 +205,14 @@ const UserCard = ({ user, onClick, isChat = false }) => {
           </div>
           <div className={styles.bottomRow}>
             <p className={styles.lastMessage}>
-              {isChat ? user?.lastMessage : user?.status || 'en línea'}
+              {isChat ? (
+                <>
+                  {user?.lastMessageIsOwn && <span className={styles.checkmarks}>✓✓ </span>}
+                  {user?.lastMessage}
+                </>
+              ) : (
+                user?.status || 'en línea'
+              )}
             </p>
             <div className={styles.badgeContainer}>
               {isChat && isMuted && (
