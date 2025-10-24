@@ -7,6 +7,7 @@ import ConversationPage from './pages/ConversationPage';
 import SettingsPage from './pages/SettingsPage';
 import StatusPage from './pages/StatusPage';
 import ComingSoonPage from './pages/ComingSoonPage';
+import ArchivedChatsPage from './pages/ArchivedChatsPage';
 import './App.css';
 
 function App() {
@@ -41,10 +42,10 @@ function App() {
                 path="/starred" 
                 element={<ComingSoonPage title="Mensajes Destacados" emoji="⭐" />} 
               />
-          <Route 
-            path="/archived" 
-            element={<ComingSoonPage title="Archivar Chats" emoji="📁" />} 
-          />
+              <Route 
+                path="/archived" 
+                element={<ArchivedChatsPage />} 
+              />
               <Route 
                 path="/profile" 
                 element={<ComingSoonPage title="Perfil" emoji="👤" />} 
