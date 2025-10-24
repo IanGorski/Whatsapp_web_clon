@@ -1,45 +1,250 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './UserCard.module.css';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
+import ContextMenu from './ContextMenu';
+import ConfirmDialog from './ConfirmDialog';
+import { useAppContext } from '../context/AppContext';
+import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const UserCard = ({ user, onClick, isChat = false }) => {
+  const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
+  const [showSubmenu, setShowSubmenu] = useState(null);
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, type: null });
+  
+  const {
+    handleMuteConversation,
+    handleUnmuteConversation,
+    handlePinConversation,
+    handleUnpinConversation,
+    handleArchiveConversation,
+    handleDeleteConversation,
+    handleClearConversation,
+    handleToggleFavorite,
+    markAsUnread,
+    markAsRead,
+  } = useAppContext();
+
+  const handleContextMenu = (e) => {
+    if (!isChat) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setContextMenu({
+      isOpen: true,
+      x: e.clientX,
+      y: e.clientY,
+    });
+  };
+
+  const isMuted = user?.muteUntil !== undefined;
+  const isPinned = user?.isPinned;
+  const isFavorite = user?.isFavorite;
+
+  const getMuteText = () => {
+    if (!isMuted) return null;
+    if (user.muteUntil === null) return 'Silenciado siempre';
+    const muteTime = new Date(user.muteUntil).toLocaleTimeString('es-ES', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+    return `Silenciado hasta las ${muteTime}`;
+  };
+
+  const handleOpenInNewWindow = () => {
+    const width = 800;
+    const height = 600;
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+    window.open(
+      `/chat/${user.id}`, 
+      '_blank',
+      `width=${width},height=${height},left=${left},top=${top}`
+    );
+  };
+
+  const contextMenuOptions = [
+    {
+      label: user.isUnread ? 'Marcar como leído' : 'Marcar como no leído',
+      icon: <MarkEmailUnreadIcon sx={{ fontSize: 18 }} />,
+      onClick: () => {
+        if (user.isUnread) {
+          markAsRead(user.id);
+        } else {
+          markAsUnread(user.id);
+        }
+      },
+    },
+    {
+      label: isPinned ? 'Desfijar' : 'Fijar arriba',
+      icon: <PushPinIcon sx={{ fontSize: 18 }} />,
+      onClick: () => {
+        if (isPinned) {
+          handleUnpinConversation(user.id);
+        } else {
+          handlePinConversation(user.id);
+        }
+      },
+    },
+    {
+      label: isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos',
+      icon: <FavoriteIcon sx={{ fontSize: 18 }} />,
+      onClick: () => handleToggleFavorite(user.id),
+    },
+    {
+      label: isMuted ? getMuteText() : 'Silenciar',
+      icon: <NotificationsOffIcon sx={{ fontSize: 18 }} />,
+      submenu: !isMuted ? [
+        {
+          label: 'Por 8 horas',
+          onClick: () => handleMuteConversation(user.id, '8h'),
+        },
+        {
+          label: 'Por una semana',
+          onClick: () => handleMuteConversation(user.id, '1w'),
+        },
+        {
+          label: 'Siempre',
+          onClick: () => handleMuteConversation(user.id, 'always'),
+        },
+      ] : undefined,
+      onClick: () => {
+        if (isMuted) {
+          handleUnmuteConversation(user.id);
+        } else {
+          setShowSubmenu('Silenciar');
+        }
+      },
+    },
+    ...(isMuted ? [{
+      label: 'Desactivar silencio',
+      icon: <NotificationsOffIcon sx={{ fontSize: 18 }} />,
+      onClick: () => handleUnmuteConversation(user.id),
+    }] : []),
+    {
+      label: 'Archivar',
+      icon: <ArchiveIcon sx={{ fontSize: 18 }} />,
+      onClick: () => handleArchiveConversation(user.id),
+    },
+    { divider: true },
+    {
+      label: 'Eliminar mensajes',
+      icon: <DeleteIcon sx={{ fontSize: 18 }} />,
+      danger: true,
+      onClick: () => {
+        setConfirmDialog({ isOpen: true, type: 'clear' });
+      },
+    },
+    {
+      label: 'Eliminar el chat',
+      icon: <DeleteIcon sx={{ fontSize: 18 }} />,
+      danger: true,
+      onClick: () => {
+        setConfirmDialog({ isOpen: true, type: 'delete' });
+      },
+    },
+    { divider: true },
+    {
+      label: 'Abrir el chat en una ventana nueva',
+      icon: <OpenInNewIcon sx={{ fontSize: 18 }} />,
+      onClick: handleOpenInNewWindow,
+    },
+  ];
+
+  const handleConfirmDelete = () => {
+    if (confirmDialog.type === 'delete') {
+      handleDeleteConversation(user.id);
+    } else if (confirmDialog.type === 'clear') {
+      handleClearConversation(user.id);
+    }
+    setConfirmDialog({ isOpen: false, type: null });
+  };
+
+  const renderUnreadBadge = () => {
+    if (isChat && user.isUnread) {
+      return <div className={styles.unreadBadge}></div>;
+    }
+    return null;
+  };
+
+  const handleCardClick = () => {
+    if (user.isUnread) {
+      markAsRead(user.id);
+    }
+    onClick();
+  };
+
   return (
-    <div className={styles.userCard} onClick={onClick}>
-      <div className={styles.avatar}>
-        {getInitials(user?.name) || 'U'}
-      </div>
-      <div className={styles.userInfo}>
-        <div className={styles.topRow}>
-          <h4>{user?.name || 'Unknown User'}</h4>
-          <div className={styles.iconContainer}>
-            {isChat && user?.pinned && (
-              <span className={styles.pinnedIcon}>
-                <PushPinIcon sx={{ fontSize: 18, color: '#54656f' }} />
-              </span>
-            )}
-            {isChat && <span className={styles.time}>{user?.time}</span>}
+    <>
+      <div 
+        className={styles.userCard} 
+        onClick={handleCardClick}
+        onContextMenu={handleContextMenu}
+      >
+        <div className={styles.avatar}>
+          {user?.avatar ? (
+            <img src={user.avatar} alt={user.name} className={styles.avatarImage} loading="lazy" />
+          ) : (
+            getInitials(user?.name) || 'U'
+          )}
+        </div>
+        <div className={styles.userInfo}>
+          <div className={styles.topRow}>
+            <h4>{user?.name || 'Unknown User'}</h4>
+            <div className={styles.iconContainer}>
+              {isChat && isPinned && (
+                <span className={styles.pinnedIcon}>
+                  <PushPinIcon sx={{ fontSize: 18, color: '#54656f' }} />
+                </span>
+              )}
+              {isChat && <span className={styles.time}>{user?.time}</span>}
+            </div>
+          </div>
+          <div className={styles.bottomRow}>
+            <p className={styles.lastMessage}>
+              {isChat ? user?.lastMessage : user?.status || 'en línea'}
+            </p>
+            <div className={styles.badgeContainer}>
+              {isChat && isMuted && (
+                <span className={styles.mutedIcon}>
+                  <NotificationsOffIcon sx={{ fontSize: 18, color: '#54656f' }} />
+                </span>
+              )}
+              {renderUnreadBadge()}
+            </div>
           </div>
         </div>
-        <div className={styles.bottomRow}>
-          <p className={styles.lastMessage}>
-            {isChat ? user?.lastMessage : user?.status || 'en línea'}
-          </p>
-          <div className={styles.badgeContainer}>
-            {isChat && user?.muted && (
-              <span className={styles.mutedIcon}>
-                <NotificationsOffIcon sx={{ fontSize: 18, color: '#54656f' }} />
-              </span>
-            )}
-            {isChat && user?.unreadCount > 0 && (
-              <div className={styles.unreadBadge}>
-                {user.unreadCount}
-              </div>
-            )}
-          </div>
-        </div>
       </div>
-    </div>
+
+      {isChat && (
+        <>
+          <ContextMenu
+            isOpen={contextMenu.isOpen}
+            position={{ x: contextMenu.x, y: contextMenu.y }}
+            options={contextMenuOptions}
+            onClose={() => {
+              setContextMenu({ isOpen: false, x: 0, y: 0 });
+              setShowSubmenu(null);
+            }}
+            showSubmenu={showSubmenu}
+          />
+
+          <ConfirmDialog
+            isOpen={confirmDialog.isOpen}
+            title={confirmDialog.type === 'delete' ? '¿Deseas eliminar el chat con ' + user?.name + '?' : '¿Deseas vaciar el chat con ' + user?.name + '?'}
+            message="Se eliminarán los mensajes de todos tus dispositivos."
+            onConfirm={handleConfirmDelete}
+            onCancel={() => setConfirmDialog({ isOpen: false, type: null })}
+            confirmText={confirmDialog.type === 'delete' ? 'Eliminar' : 'Vaciar'}
+            cancelText="Cancelar"
+            confirmStyle="danger"
+          />
+        </>
+      )}
+    </>
   );
 };
 
@@ -48,4 +253,5 @@ function getInitials(name) {
   const words = name.trim().split(' ');
   return (words[0][0] + (words[1]?.[0] || '')).toUpperCase();
 }
+
 export default UserCard;

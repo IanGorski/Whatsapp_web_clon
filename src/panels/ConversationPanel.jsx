@@ -85,18 +85,24 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
   if (!activeConversation) {
     return (
       <div className={styles.conversationPanel}>
-        <div className={styles.emptyState}>
-          <h3>WhatsApp para Windows</h3>
-          <p>Envía y recibe mensajes sin mantener tu teléfono conectado.</p>
-          <p>Usa Whatsapp en hasta 4 dispositivos vinculados y 1 teléfono a la vez.</p>
+        <div className={styles.leftFranja}></div>
+        <div className={styles.chatSection}>
+          <div className={styles.emptyState}>
+            <h3>WhatsApp para Windows</h3>
+            <p>Envía y recibe mensajes sin mantener tu teléfono conectado.</p>
+            <p>Usa Whatsapp en hasta 4 dispositivos vinculados y 1 teléfono a la vez.</p>
+          </div>
         </div>
+        <div className={styles.rightFranja}></div>
       </div>
     );
   }
 
   return (
     <div className={styles.conversationPanel}>
-      <div className={styles.conversationHeader}>
+      <div className={styles.leftFranja}></div>
+      <div className={styles.chatSection}>
+        <div className={styles.conversationHeader}>
         <div className={styles.contactInfo}>
           <div className={styles.avatar}>
             {activeConversation.name[0]}
@@ -181,6 +187,8 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
         onSendMessage={handleSendMessage} 
         conversationId={activeConversation?.id}
       />
+      </div>
+      <div className={styles.rightFranja}></div>
     </div>
   );
 };
