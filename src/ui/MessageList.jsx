@@ -1,10 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './MessageList.module.css';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ContextMenu from './ContextMenu';
+import ConfirmDialog from './ConfirmDialog';
+import ReplyIcon from '@mui/icons-material/Reply';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ForwardIcon from '@mui/icons-material/Forward';
+import StarIcon from '@mui/icons-material/Star';
+import PushPinIcon from '@mui/icons-material/PushPin';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import ShareIcon from '@mui/icons-material/Share';
+import InfoIcon from '@mui/icons-material/Info';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import AddIcon from '@mui/icons-material/Add';
 
 const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, onDeleteMessage }) => {
   const messageRefs = useRef({});
   const containerRef = useRef(null);
+  const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0, message: null });
+  const [showReactionBar, setShowReactionBar] = useState({ isOpen: false, x: 0, y: 0, messageId: null });
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, messageId: null });
   
   // Función para resaltar texto solo en el mensaje activo
   const highlightText = (text, search, isActiveMatch) => {
@@ -31,7 +50,140 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
     if (onDeleteMessage) {
       onDeleteMessage(messageId);
     }
+    setConfirmDialog({ isOpen: false, messageId: null });
   };
+
+  // Manejar menú contextual
+  const handleContextMenu = (e, message) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setContextMenu({
+      isOpen: true,
+      x: e.clientX,
+      y: e.clientY,
+      message,
+    });
+  };
+
+  // Opciones del menú contextual para mensajes propios
+  const getOwnMessageOptions = (message) => [
+    {
+      label: 'Responder',
+      icon: <ReplyIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Responder a mensaje', message.id),
+    },
+    {
+      label: 'Copiar',
+      icon: <ContentCopyIcon sx={{ fontSize: 18 }} />,
+      onClick: () => {
+        navigator.clipboard.writeText(message.content);
+      },
+    },
+    {
+      label: 'Reenviar',
+      icon: <ForwardIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Reenviar mensaje', message.id),
+    },
+    {
+      label: 'Destacar',
+      icon: <StarIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Destacar mensaje', message.id),
+    },
+    {
+      label: 'Fijar',
+      icon: <PushPinIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Fijar mensaje', message.id),
+    },
+    { divider: true },
+    {
+      label: 'Eliminar',
+      icon: <DeleteIcon sx={{ fontSize: 18 }} />,
+      danger: true,
+      onClick: () => {
+        setConfirmDialog({ isOpen: true, messageId: message.id });
+      },
+    },
+    {
+      label: 'Seleccionar',
+      icon: <CheckBoxOutlineBlankIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Seleccionar mensaje', message.id),
+    },
+    {
+      label: 'Compartir',
+      icon: <ShareIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Compartir mensaje', message.id),
+    },
+    {
+      label: 'Info.',
+      icon: <InfoIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Info del mensaje', message.id),
+    },
+  ];
+
+  // Opciones del menú contextual para mensajes recibidos
+  const getReceivedMessageOptions = (message) => [
+    {
+      label: 'Responder',
+      icon: <ReplyIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Responder a mensaje', message.id),
+    },
+    {
+      label: 'Copiar',
+      icon: <ContentCopyIcon sx={{ fontSize: 18 }} />,
+      onClick: () => {
+        navigator.clipboard.writeText(message.content);
+      },
+    },
+    {
+      label: 'Reenviar',
+      icon: <ForwardIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Reenviar mensaje', message.id),
+    },
+    {
+      label: 'Destacar',
+      icon: <StarIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Destacar mensaje', message.id),
+    },
+    {
+      label: 'Fijar',
+      icon: <PushPinIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Fijar mensaje', message.id),
+    },
+    { divider: true },
+    {
+      label: 'Eliminar para mí',
+      icon: <DeleteIcon sx={{ fontSize: 18 }} />,
+      danger: true,
+      onClick: () => {
+        setConfirmDialog({ isOpen: true, messageId: message.id });
+      },
+    },
+    {
+      label: 'Seleccionar',
+      icon: <CheckBoxOutlineBlankIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Seleccionar mensaje', message.id),
+    },
+    {
+      label: 'Compartir',
+      icon: <ShareIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Compartir mensaje', message.id),
+    },
+    {
+      label: 'Info.',
+      icon: <InfoIcon sx={{ fontSize: 18 }} />,
+      onClick: () => console.log('Info del mensaje', message.id),
+    },
+  ];
+
+  // Reacciones rápidas
+  const reactions = [
+    { icon: <ThumbUpIcon sx={{ fontSize: 18 }} />, label: 'Me gusta' },
+    { icon: <FavoriteIcon sx={{ fontSize: 18 }} />, label: 'Amor' },
+    { icon: <SentimentSatisfiedAltIcon sx={{ fontSize: 18 }} />, label: 'Risa' },
+    { icon: <EmojiEmotionsIcon sx={{ fontSize: 18 }} />, label: 'Sorpresa' },
+    { icon: <InsertEmoticonIcon sx={{ fontSize: 18 }} />, label: 'Triste' },
+    { icon: <AddIcon sx={{ fontSize: 18 }} />, label: 'Más' },
+  ];
 
   // Scroll al mensaje activo cuando cambie la selección
   useEffect(() => {
@@ -69,7 +221,33 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
               key={message.id} 
               ref={el => messageRefs.current[index] = el}
               className={`${styles.messageContainer} ${message.isOwn ? styles.ownMessage : styles.otherMessage}`}
+              onContextMenu={(e) => handleContextMenu(e, message)}
             >
+              {/* Barra de reacciones rápidas */}
+              {showReactionBar.isOpen && showReactionBar.messageId === message.id && (
+                <div 
+                  className={styles.reactionBar}
+                  style={{ 
+                    top: showReactionBar.y - 50,
+                    left: showReactionBar.x - 150,
+                  }}
+                >
+                  {reactions.map((reaction, idx) => (
+                    <button 
+                      key={idx}
+                      className={styles.reactionButton}
+                      onClick={() => {
+                        console.log('Reacción:', reaction.label);
+                        setShowReactionBar({ isOpen: false, x: 0, y: 0, messageId: null });
+                      }}
+                      title={reaction.label}
+                    >
+                      {reaction.icon}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               <div className={styles.messageBubble}>
                 <div className={styles.messageContent}>
                   {highlightText(message.content, searchTerm, isActiveMessage)}
@@ -81,19 +259,36 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
                   )}
                 </div>
               </div>
-              
-              {/* Botón de eliminar mensaje */}
-              <button 
-                className={styles.deleteButton}
-                onClick={() => handleDeleteMessage(message.id)}
-                title="Eliminar mensaje"
-              >
-                <DeleteIcon sx={{ fontSize: 18, color: '#54656f' }} />
-              </button>
             </div>
           );
         })
       )}
+
+      {/* Menú contextual */}
+      {contextMenu.isOpen && contextMenu.message && (
+        <ContextMenu
+          isOpen={contextMenu.isOpen}
+          position={{ x: contextMenu.x, y: contextMenu.y }}
+          options={
+            contextMenu.message.isOwn 
+              ? getOwnMessageOptions(contextMenu.message)
+              : getReceivedMessageOptions(contextMenu.message)
+          }
+          onClose={() => setContextMenu({ isOpen: false, x: 0, y: 0, message: null })}
+        />
+      )}
+
+      {/* Diálogo de confirmación */}
+      <ConfirmDialog
+        isOpen={confirmDialog.isOpen}
+        title="¿Deseas eliminar este mensaje?"
+        message="Este mensaje se eliminará para ti. Los demás participantes de la conversación aún podrán verlo."
+        onConfirm={() => handleDeleteMessage(confirmDialog.messageId)}
+        onCancel={() => setConfirmDialog({ isOpen: false, messageId: null })}
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+        confirmStyle="danger"
+      />
     </div>
   );
 };
