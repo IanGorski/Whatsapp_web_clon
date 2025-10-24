@@ -37,82 +37,123 @@ export const AppProvider = ({ children }) => {
         const initialContacts = [
             {
                 id: 1,
-                name: "John Goldberg",
-                status: "en línea",
-                lastMessage: "Como andas papu?",
+                name: "Ellen Ripley",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
+                lastMessage: "¿Has visto al xenomorfo?",
                 time: "10:30",
-                unreadCount: 0,
-                messages: [
-                    {
-                        id: 1,
-                        sender: "John Goldberg",
-                        content: "Como andas papu?",
-                        timestamp: "10:30 AM",
-                        isOwn: false,
-                    },
-                ],
+                isUnread: true,
             },
             {
                 id: 2,
-                name: "Messi",
-                status: "hace 5 min",
-                lastMessage: "Te dediqué un gol kpo, SIUUUUUUU",
-                time: "09:45",
-                unreadCount: 0,
-                messages: [
-                    {
-                        id: 2,
-                        sender: "Messi",
-                        content: "Te dediqué un gol kpo, SIUUUUUUU",
-                        timestamp: "09:45 AM",
-                        isOwn: false,
-                    },
-                ],
+                name: "Ash",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
+                lastMessage: "La misión es prioridad.",
+                time: "09:15",
+                isUnread: false,
             },
             {
                 id: 3,
-                name: "Malvavisco",
-                status: "en línea",
-                lastMessage: "Respondemeee es urgenteeeeeee 😱",
-                time: "08:20",
-                unreadCount: 2,
-                messages: [
-                    {
-                        id: 3,
-                        sender: "Malvavisco",
-                        content: "Tengo que decirte algooooooo",
-                        timestamp: "07:18 AM",
-                        isOwn: false,
-                    },
-                    {
-                        id: 4,
-                        sender: "Malvavisco",
-                        content: "Necesito que me respondas porfabo",
-                        timestamp: "07:43 AM",
-                        isOwn: false,
-                    },
-                    {
-                        id: 5,
-                        sender: "You",
-                        content: "Que pasooo",
-                        timestamp: "07:50 AM",
-                        isOwn: true,
-                    },
-                    {
-                        id: 6,
-                        sender: "Malvavisco",
-                        content: "Te tengo que decir algo importantiiisimo",
-                        timestamp: "08:15 AM",
-                        isOwn: false,
-                    },
-                    {
-                        id: 7,
-                        sender: "Malvavisco",
-                        content: "Respondemeee es urgenteeeeeee 😱",
-                        timestamp: "08:20 AM",
-                        isOwn: false,
-                    },
-                ],
+                name: "Dallas",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
+                lastMessage: "Mantengan la calma.",
+                time: "08:45",
+                isUnread: false,
+            },
+            {
+                id: 4,
+                name: "Parker",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
+                lastMessage: "¿Qué hacemos ahora?",
+                time: "07:50",
+                isUnread: true,
+            },
+            {
+                id: 5,
+                name: "Lambert",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
+                lastMessage: "¡Cuidado!",
+                time: "06:30",
+                isUnread: false,
+            },
+            {
+                id: 6,
+                name: "Brett",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
+                lastMessage: "Entendido.",
+                time: "05:20",
+                isUnread: false,
+            },
+            {
+                id: 7,
+                name: "Kane",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
+                lastMessage: "¿Qué sucede?",
+                time: "04:10",
+                isUnread: true,
+            },
+            {
+                id: 8,
+                name: "Bishop",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
+                lastMessage: "No está mal para un humano.",
+                time: "03:00",
+                isUnread: false,
+            },
+            {
+                id: 9,
+                name: "Hicks",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
+                lastMessage: "Mantente alerta.",
+                time: "02:45",
+                isUnread: true,
+            },
+            {
+                id: 10,
+                name: "Hudson",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
+                lastMessage: "¡Estamos acabados!",
+                time: "01:30",
+                isUnread: false,
+            },
+            {
+                id: 11,
+                name: "Vasquez",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
+                lastMessage: "¡Vamos a luchar!",
+                time: "00:15",
+                isUnread: true,
+            },
+            {
+                id: 12,
+                name: "Gorman",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
+                lastMessage: "Sigan el plan.",
+                time: "23:50",
+                isUnread: false,
+            },
+            {
+                id: 13,
+                name: "Newt",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
+                lastMessage: "Ellos vienen de noche.",
+                time: "22:40",
+                isUnread: true,
+            },
+            {
+                id: 14,
+                name: "Frost",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
+                lastMessage: "Todos vamos a morir.",
+                time: "21:30",
+                isUnread: false,
+            },
+            {
+                id: 15,
+                name: "Apone",
+                avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
+                lastMessage: "Mírame a los ojos.",
+                time: "20:20",
+                isUnread: true,
             },
         ];
 
@@ -203,6 +244,217 @@ export const AppProvider = ({ children }) => {
         setConversations(updatedConversations);
     };
 
+    const handleMuteConversation = (conversationId, duration) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                const muteUntil =
+                    duration === "8h"
+                        ? new Date(Date.now() + 8 * 60 * 60 * 1000)
+                        : duration === "1w"
+                        ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+                        : duration === "always"
+                        ? null
+                        : conv.muteUntil;
+
+                return {
+                    ...conv,
+                    muteUntil,
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+    };
+
+    const handleUnmuteConversation = (conversationId) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                return {
+                    ...conv,
+                    muteUntil: undefined,
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+    };
+
+    // Fijar/Desfijar conversación
+    const handlePinConversation = (conversationId) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                return {
+                    ...conv,
+                    isPinned: true,
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+        
+        // Actualizar conversación activa si es la misma
+        if (activeConversation && activeConversation.id === conversationId) {
+            setActiveConversation({ ...activeConversation, isPinned: true });
+        }
+    };
+
+    const handleUnpinConversation = (conversationId) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                return {
+                    ...conv,
+                    isPinned: false,
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+        
+        // Actualizar conversación activa si es la misma
+        if (activeConversation && activeConversation.id === conversationId) {
+            setActiveConversation({ ...activeConversation, isPinned: false });
+        }
+    };
+
+    // Archivar/Desarchivar conversación
+    const handleArchiveConversation = (conversationId) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                return {
+                    ...conv,
+                    isArchived: true,
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+        
+        // Si es la conversación activa, deseleccionarla
+        if (activeConversation && activeConversation.id === conversationId) {
+            handleDeselectContact();
+        }
+    };
+
+    const handleUnarchiveConversation = (conversationId) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                return {
+                    ...conv,
+                    isArchived: false,
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+    };
+
+    // Eliminar conversación completa
+    const handleDeleteConversation = (conversationId) => {
+        const updatedConversations = conversations.filter(
+            (conv) => conv.id !== conversationId
+        );
+
+        setConversations(updatedConversations);
+        
+        // Si es la conversación activa, deseleccionarla
+        if (activeConversation && activeConversation.id === conversationId) {
+            handleDeselectContact();
+        }
+    };
+
+    // Vaciar mensajes de una conversación
+    const handleClearConversation = (conversationId) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                return {
+                    ...conv,
+                    messages: [],
+                    lastMessage: "Sin mensajes",
+                    time: "",
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+        
+        // Actualizar conversación activa si es la misma
+        if (activeConversation && activeConversation.id === conversationId) {
+            setActiveConversation({
+                ...activeConversation,
+                messages: [],
+                lastMessage: "Sin mensajes",
+                time: "",
+            });
+        }
+    };
+
+    // Marcar como leído/no leído
+    const handleMarkAsUnread = (conversationId) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                return {
+                    ...conv,
+                    unreadCount: conv.unreadCount > 0 ? 0 : 1,
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+        
+        if (activeConversation && activeConversation.id === conversationId) {
+            setActiveConversation({ 
+                ...activeConversation, 
+                unreadCount: activeConversation.unreadCount > 0 ? 0 : 1 
+            });
+        }
+    };
+
+    // Añadir a favoritos
+    const handleToggleFavorite = (conversationId) => {
+        const updatedConversations = conversations.map((conv) => {
+            if (conv.id === conversationId) {
+                return {
+                    ...conv,
+                    isFavorite: !conv.isFavorite,
+                };
+            }
+            return conv;
+        });
+
+        setConversations(updatedConversations);
+        
+        if (activeConversation && activeConversation.id === conversationId) {
+            setActiveConversation({ 
+                ...activeConversation, 
+                isFavorite: !activeConversation.isFavorite 
+            });
+        }
+    };
+
+    const markAsUnread = (chatId) => {
+        setConversations((prevConversations) =>
+            prevConversations.map((chat) =>
+                chat.id === chatId ? { ...chat, isUnread: true } : chat
+            )
+        );
+    };
+
+    const markAsRead = (chatId) => {
+        setConversations((prevConversations) =>
+            prevConversations.map((chat) =>
+                chat.id === chatId ? { ...chat, isUnread: false } : chat
+            )
+        );
+    };
+
     const value = {
         activeConversation,
         setActiveConversation,
@@ -215,6 +467,18 @@ export const AppProvider = ({ children }) => {
         handleSendMessage,
         handleDeleteMessage,
         handleDeselectContact,
+        handleMuteConversation,
+        handleUnmuteConversation,
+        handlePinConversation,
+        handleUnpinConversation,
+        handleArchiveConversation,
+        handleUnarchiveConversation,
+        handleDeleteConversation,
+        handleClearConversation,
+        handleMarkAsUnread,
+        handleToggleFavorite,
+        markAsUnread,
+        markAsRead,
     };
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
