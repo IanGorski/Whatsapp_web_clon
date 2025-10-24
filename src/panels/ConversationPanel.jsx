@@ -183,6 +183,12 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
         currentMatchIndex={currentMatchIndex}
         onDeleteMessage={onDeleteMessage}
       />
+      {/* Mostrar último mensaje si no hay mensajes */}
+      {getMessagesToShow().length === 0 && (
+        <div className={styles.emptyState}>
+          <p>{activeConversation?.lastMessage || "No hay mensajes aún"}</p>
+        </div>
+      )}
       <MessageComposer 
         onSendMessage={handleSendMessage} 
         conversationId={activeConversation?.id}
