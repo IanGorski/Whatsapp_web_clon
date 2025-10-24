@@ -42,14 +42,21 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "¿Has visto al xenomorfo?",
                 time: "10:30",
                 isUnread: true,
+                messages: [
+                    { id: 1, sender: "Ellen Ripley", content: "¿Has visto al xenomorfo?", timestamp: "10:30", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 2,
                 name: "Ash",
                 avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
-                lastMessage: "La misión es prioridad.",
+                lastMessage: "Gracias por la información",
                 time: "09:15",
                 isUnread: false,
+                lastMessageIsOwn: true,
+                messages: [
+                    { id: 1, sender: "You", content: "Gracias por la información", timestamp: "09:15", isOwn: true, isRead: true }
+                ]
             },
             {
                 id: 3,
@@ -58,6 +65,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "Mantengan la calma.",
                 time: "08:45",
                 isUnread: false,
+                messages: [
+                    { id: 1, sender: "Dallas", content: "Mantengan la calma.", timestamp: "08:45", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 4,
@@ -66,14 +76,21 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "¿Qué hacemos ahora?",
                 time: "07:50",
                 isUnread: true,
+                messages: [
+                    { id: 1, sender: "Parker", content: "¿Qué hacemos ahora?", timestamp: "07:50", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 5,
                 name: "Lambert",
                 avatar: "https://m.media-amazon.com/images/M/MV5BMTc3YWUzYjYtNmRmZS00NGVlLTg0N2ItN2Q2OTU5M2FlMDE4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
-                lastMessage: "¡Cuidado!",
+                lastMessage: "Todo va a estar bien",
                 time: "06:30",
                 isUnread: false,
+                lastMessageIsOwn: true,
+                messages: [
+                    { id: 1, sender: "You", content: "Todo va a estar bien", timestamp: "06:30", isOwn: true, isRead: true }
+                ]
             },
             {
                 id: 6,
@@ -82,6 +99,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "Entendido.",
                 time: "05:20",
                 isUnread: false,
+                messages: [
+                    { id: 1, sender: "Brett", content: "Entendido.", timestamp: "05:20", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 7,
@@ -90,14 +110,21 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "¿Qué sucede?",
                 time: "04:10",
                 isUnread: true,
+                messages: [
+                    { id: 1, sender: "Kane", content: "¿Qué sucede?", timestamp: "04:10", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 8,
                 name: "Bishop",
                 avatar: "https://m.media-amazon.com/images/M/MV5BMTk3NzU5NDE0MF5BMl5BanBnXkFtZTgwNjAxNzE5MDI@._V1_FMjpg_UX500_.jpg",
-                lastMessage: "No está mal para un humano.",
+                lastMessage: "Nos vemos pronto",
                 time: "03:00",
                 isUnread: false,
+                lastMessageIsOwn: true,
+                messages: [
+                    { id: 1, sender: "You", content: "Nos vemos pronto", timestamp: "03:00", isOwn: true, isRead: true }
+                ]
             },
             {
                 id: 9,
@@ -106,6 +133,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "Mantente alerta.",
                 time: "02:45",
                 isUnread: true,
+                messages: [
+                    { id: 1, sender: "Hicks", content: "Mantente alerta.", timestamp: "02:45", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 10,
@@ -114,6 +144,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "¡Estamos acabados!",
                 time: "01:30",
                 isUnread: false,
+                messages: [
+                    { id: 1, sender: "Hudson", content: "¡Estamos acabados!", timestamp: "01:30", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 11,
@@ -122,6 +155,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "¡Vamos a luchar!",
                 time: "00:15",
                 isUnread: true,
+                messages: [
+                    { id: 1, sender: "Vasquez", content: "¡Vamos a luchar!", timestamp: "00:15", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 12,
@@ -130,6 +166,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "Sigan el plan.",
                 time: "23:50",
                 isUnread: false,
+                messages: [
+                    { id: 1, sender: "Gorman", content: "Sigan el plan.", timestamp: "23:50", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 13,
@@ -138,6 +177,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "Ellos vienen de noche.",
                 time: "22:40",
                 isUnread: true,
+                messages: [
+                    { id: 1, sender: "Newt", content: "Ellos vienen de noche.", timestamp: "22:40", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 14,
@@ -146,6 +188,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "Todos vamos a morir.",
                 time: "21:30",
                 isUnread: false,
+                messages: [
+                    { id: 1, sender: "Frost", content: "Todos vamos a morir.", timestamp: "21:30", isOwn: false, isRead: true }
+                ]
             },
             {
                 id: 15,
@@ -154,6 +199,9 @@ export const AppProvider = ({ children }) => {
                 lastMessage: "Mírame a los ojos.",
                 time: "20:20",
                 isUnread: true,
+                messages: [
+                    { id: 1, sender: "Apone", content: "Mírame a los ojos.", timestamp: "20:20", isOwn: false, isRead: true }
+                ]
             },
         ];
 
@@ -188,12 +236,14 @@ export const AppProvider = ({ children }) => {
                         minute: "2-digit",
                     }),
                     isOwn: true,
+                    isRead: true, // Marcar como leído al enviar
                 };
 
                 const updatedConv = {
                     ...conv,
                     messages: [...(conv.messages || []), newMessage],
                     lastMessage: message.content,
+                    lastMessageIsOwn: true, // Marcar que el último mensaje es del usuario
                     time: new Date().toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -228,10 +278,16 @@ export const AppProvider = ({ children }) => {
                         ? filteredMessages[filteredMessages.length - 1].timestamp
                         : "";
 
+                const lastMessageIsOwn =
+                    filteredMessages.length > 0
+                        ? filteredMessages[filteredMessages.length - 1].isOwn
+                        : false;
+
                 const updatedConv = {
                     ...conv,
                     messages: filteredMessages,
                     lastMessage: lastMessage,
+                    lastMessageIsOwn: lastMessageIsOwn,
                     time: lastTime,
                 };
 
@@ -376,6 +432,7 @@ export const AppProvider = ({ children }) => {
                     ...conv,
                     messages: [],
                     lastMessage: "Sin mensajes",
+                    lastMessageIsOwn: false,
                     time: "",
                 };
             }
@@ -390,6 +447,7 @@ export const AppProvider = ({ children }) => {
                 ...activeConversation,
                 messages: [],
                 lastMessage: "Sin mensajes",
+                lastMessageIsOwn: false,
                 time: "",
             });
         }
