@@ -11,7 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-const UserCard = ({ user, onClick, isChat = false }) => {
+const UserCard = ({ user, onClick, isChat = false, disableContextMenu = false }) => {
   const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
   const [showSubmenu, setShowSubmenu] = useState(null);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, type: null });
@@ -30,7 +30,7 @@ const UserCard = ({ user, onClick, isChat = false }) => {
   } = useAppContext();
 
   const handleContextMenu = (e) => {
-    if (!isChat) return;
+    if (!isChat || disableContextMenu) return;
     e.preventDefault();
     e.stopPropagation();
     setContextMenu({
