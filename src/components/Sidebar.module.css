@@ -209,6 +209,28 @@
     text-overflow: ellipsis;
 }
 
+/* Conversación */
+.conversationItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #3c4043;
+    cursor: pointer;
+}
+
+.pinButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #aebac1;
+    transition: color 0.18s;
+}
+
+.pinButton:hover {
+    color: #00a884;
+}
+
 /*--*/
 @media (max-width: 768px) {
     .menuItem {
