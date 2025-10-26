@@ -13,7 +13,6 @@ const ChatPage = () => {
         activeConversation,
         isMobile,
         showChatList,
-        handleSelectContact,
         handleSendMessage,
         handleDeleteMessage,
         handleDeselectContact
@@ -21,17 +20,9 @@ const ChatPage = () => {
 
     // Manejar tecla ESC para deseleccionar chat
     const handleEscapePress = React.useCallback(() => {
-        console.log('ESC presionado, activeConversation:', activeConversation);
-
-        // Siempre limpiar el estado y navegar
         handleDeselectContact();
-
-        // Forzar navegación a /chats sin importar la URL actual
-        const currentPath = window.location.pathname;
-        console.log('Navegando desde:', currentPath, 'hacia: /chats');
-
         navigate('/chats', { replace: true });
-    }, [activeConversation, handleDeselectContact, navigate]);
+    }, [handleDeselectContact, navigate]);
 
     useEscapeKey(handleEscapePress);
 
@@ -41,7 +32,6 @@ const ChatPage = () => {
             <div className={styles.chatPage}>
                 {showChatList && (
                     <LeftPanel
-                        onSelectContact={handleSelectContact}
                         conversations={conversations}
                     />
                 )}
@@ -60,7 +50,6 @@ const ChatPage = () => {
     return (
         <div className={styles.chatPage}>
             <LeftPanel
-                onSelectContact={handleSelectContact}
                 conversations={conversations}
             />
             {activeConversation ? (

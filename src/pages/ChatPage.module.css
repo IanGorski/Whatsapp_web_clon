@@ -2,6 +2,7 @@
     display: flex;
     flex: 1;
     height: 100vh;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -15,6 +16,7 @@
     border-left: 1px solid #e4e6ea;
     padding: 2rem;
     text-align: center;
+    min-width: 0;
 }
 
 .emptyState h3 {
@@ -43,17 +45,23 @@
 @media (min-width: 769px) and (max-width: 1024px) {
     .chatPage {
         justify-content: flex-start;
+        width: 100%;
     }
 
     .emptyState {
-        margin-left: auto;
-        width: calc(100vw - 350px);
+        flex: 1;
+        width: auto;
         border-left: 1px solid #e4e6ea;
     }
 }
 
 @media (min-width: 1025px) {
+    .chatPage {
+        width: 100%;
+    }
+    
     .emptyState {
-        max-width: calc(100vw - 460px);
+        flex: 1;
+        width: auto;
     }
 }
