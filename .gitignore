@@ -27,3 +27,7 @@ dist-ssr
 CSS_CLASES_DOC.md
 DOCUMENTACION_PROYECTO.md
 EVALUACION_PROYECTO.md
+
+# Ignorar todos los archivos .md excepto README.md
+*.md
+!README.md
