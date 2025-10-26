@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import LeftPanel from '../panels/LeftPanel';
 import ConversationPanel from '../panels/ConversationPanel';
@@ -12,7 +12,6 @@ const ConversationPage = () => {
     const {
         conversations,
         activeConversation,
-        setActiveConversation,
         isMobile,
         showChatList,
         handleSelectContact,
@@ -22,32 +21,30 @@ const ConversationPage = () => {
     } = useAppContext();
 
     // Manejar tecla ESC para deseleccionar chat
-    const handleEscapePress = React.useCallback(() => {
-        console.log('ESC presionado en ConversationPage, activeConversation:', activeConversation);
-
-        // Siempre limpiar el estado y navegar
+    const handleEscapePress = useCallback(() => {
         handleDeselectContact();
-
-        // Navegar a /chats para mostrar la pantalla vacía
-        console.log('Navegando desde ConversationPage hacia: /chats');
         navigate('/chats', { replace: true });
-    }, [activeConversation, handleDeselectContact, navigate]);
+    }, [handleDeselectContact, navigate]);
 
     useEscapeKey(handleEscapePress);
 
+    // Buscar conversación por ID (memorizado)
+    const currentConversation = useMemo(() => {
+        if (!id || conversations.length === 0) return null;
+        const conversationId = parseInt(id);
+        return conversations.find(conv => conv.id === conversationId) || null;
+    }, [id, conversations]);
+
     // Encontrar la conversación por ID cuando se carga la página o cambia el ID
-    React.useEffect(() => {
-        if (id && conversations.length > 0) {
-            const conversationId = parseInt(id);
-            const conversation = conversations.find(conv => conv.id === conversationId);
-            if (conversation) {
-                // Solo actualizar si es diferente a la conversación actual
-                if (!activeConversation || activeConversation.id !== conversationId) {
-                    setActiveConversation(conversation);
-                }
+    useEffect(() => {
+        if (currentConversation) {
+            // Solo actualizar si la conversación cambió o no hay conversación activa
+            if (!activeConversation || activeConversation.id !== currentConversation.id) {
+                handleSelectContact(currentConversation);
             }
         }
-    }, [id, conversations, activeConversation, setActiveConversation]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentConversation]);
 
     // En móvil mantener el comportamiento original
     if (isMobile) {
@@ -55,7 +52,6 @@ const ConversationPage = () => {
             <div className={styles.conversationPage}>
                 {showChatList && (
                     <LeftPanel
-                        onSelectContact={handleSelectContact}
                         conversations={conversations}
                     />
                 )}
@@ -81,7 +77,6 @@ const ConversationPage = () => {
     return (
         <div className={styles.conversationPage}>
             <LeftPanel
-                onSelectContact={handleSelectContact}
                 conversations={conversations}
             />
             {activeConversation ? (
