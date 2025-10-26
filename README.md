@@ -11,6 +11,8 @@ Este proyecto fue desarrollado como trabajo final del curso de Frontend UTN, con
 - **React Router DOM 6.x** - Enrutamiento y navegación SPA
 - **CSS Modules** - Estilos modulares y encapsulados
 - **ESLint** - Linting y calidad de código
+- **Vitest** - Framework de testing unitario
+- **Material-UI Icons** - Iconos de interfaz
 
 ## ✨ Características Implementadas
 
@@ -50,6 +52,12 @@ src/
 │   └── AppContext.jsx  # Proveedor de estado de la aplicación
 ├── hooks/              # Custom hooks reutilizables
 │   └── useEscapeKey.js # Hook para manejo de tecla ESC
+├── tests/              # Tests unitarios (Vitest)
+│   ├── AppContext.test.js      # Tests de estado global
+│   ├── UIComponents.test.js    # Tests de UI
+│   └── setup.js                # Configuración de tests
+├── utils/              # Utilidades y helpers
+│   └── testHelpers.js  # Funciones auxiliares para testing
 ├── pages/              # Páginas principales con rutas
 │   ├── ChatPage.jsx    # Página principal de chats
 │   ├── ChatPage.module.css
@@ -121,6 +129,9 @@ git clone [URL_DEL_REPOSITORIO]
 # Instalar dependencias
 npm install
 
+# Instalar dependencias de testing
+npm install --save-dev vitest @vitest/ui jsdom
+
 # Ejecutar en modo desarrollo
 npm run dev
 
@@ -130,6 +141,29 @@ npm run build
 # Vista previa de producción
 npm run preview
 ```
+
+## 🧪 Testing
+
+```bash
+# Ejecutar tests en modo watch
+npm test
+
+# Ejecutar tests una sola vez
+npm run test:run
+
+# Ver interfaz gráfica de tests
+npm run test:ui
+
+# Generar reporte de cobertura
+npm run test:coverage
+```
+
+**Cobertura de Tests:**
+- ✅ 35+ tests unitarios
+- ✅ Gestión de estado (AppContext)
+- ✅ Componentes UI y eventos táctiles
+- ✅ Funcionalidad de búsqueda
+- ✅ Navegación y routing
 
 ## 📱 Compatibilidad
 
@@ -143,3 +177,14 @@ npm run preview
 - **YAGNI (You Aren't Gonna Need It)**: Implementación incremental sin sobre-ingeniería
 - **KISS (Keep It Simple, Stupid)**: Arquitectura simple y comprensible
 - **Separation of Concerns**: Clara separación entre lógica, presentación y datos
+
+## ✅ Estado del Proyecto
+
+- ✅ Funcionalidades core implementadas
+- ✅ Diseño responsive optimizado
+- ✅ Tests unitarios (35+ tests)
+- ✅ 0 errores de compilación
+- ✅ Documentación completa
+- 🚧 Funcionalidades avanzadas en desarrollo
+
+---
