@@ -1,6 +1,7 @@
 .App {
   display: flex;
   height: 100vh;
+  height: 100dvh; /* Altura dinámica del viewport para móviles */
   width: 100vw;
   background-color: #f0f2f5;
   overflow: hidden;
@@ -19,6 +20,7 @@
   transition: margin-left 0.3s ease;
   position: relative;
   height: 100vh;
+  height: 100dvh; /* Altura dinámica del viewport para móviles */
   overflow: hidden;
 }
 

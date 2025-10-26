@@ -7,6 +7,8 @@
 html {
   height: 100%;
   overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 body {
@@ -16,14 +18,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f0f2f5;
   height: 100vh;
+  height: 100dvh; /* Altura dinámica del viewport para móviles */
   width: 100vw;
   overflow: hidden;
   position: fixed;
+  touch-action: pan-y pinch-zoom;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
+  height: 100dvh; /* Altura dinámica del viewport para móviles */
   overflow: hidden;
   position: fixed;
   top: 0;
