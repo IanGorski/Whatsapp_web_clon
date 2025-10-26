@@ -34,7 +34,7 @@ const MessageComposer = ({ onSendMessage, conversationId }) => {
   };
 
   const handleIconClick = () => {
-    alert('Este icono no tiene funcionalidad jeje');
+    // TODO: Implementar funcionalidad de iconos adicionales
   };
 
   const handleContextMenu = (e) => {
@@ -53,8 +53,8 @@ const MessageComposer = ({ onSendMessage, conversationId }) => {
       if (inputRef.current) {
         inputRef.current.focus();
       }
-    } catch (err) {
-      console.error('Error al pegar:', err);
+    } catch {
+      // Silently fail if clipboard access is denied
     }
   };
 
@@ -67,7 +67,9 @@ const MessageComposer = ({ onSendMessage, conversationId }) => {
     {
       label: 'Formato de texto',
       icon: <TextFormatIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Formato de texto'),
+      onClick: () => {
+        // TODO: Implementar formato de texto
+      },
     },
   ];
 
