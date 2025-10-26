@@ -4,12 +4,17 @@
   display: flex;
   flex-direction: row;
   height: 100vh;
+  height: 100dvh; /* Altura dinámica del viewport para móviles */
+  width: 100%;
+  overflow: hidden;
 }
 
 .leftFranja,
 .rightFranja {
   width: 15%;
+  min-width: 100px;
   background-color: #ffffff;
+  flex-shrink: 0;
 }
 
 .chatSection {
@@ -17,6 +22,8 @@
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .conversationHeader {
@@ -29,9 +36,29 @@
   min-height: 70px;
 }
 
+.backButton {
+  background: none;
+  border: none;
+  color: #54656f;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background-color: #e9edef;
+}
+
 .contactInfo {
   display: flex;
   align-items: center;
+  flex: 1;
+  min-width: 0;
 }
 
 .avatar {
@@ -46,6 +73,15 @@
   font-weight: bold;
   font-size: 16px;
   margin-right: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .contactDetails h3 {
@@ -251,9 +287,13 @@
 /*--*/
 @media (max-width: 320px) {
   .conversationPanel {
-    width: calc(100vw - 50px);
+    width: 100vw;
     height: 100vh;
-    position: relative;
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
   }
 
   .conversationHeader {
@@ -263,6 +303,7 @@
 
   .contactInfo {
     flex: 1;
+    min-width: 0;
   }
 
   .avatar {
@@ -274,6 +315,9 @@
 
   .contactDetails h3 {
     font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .status {
@@ -348,9 +392,13 @@
 /*--*/
 @media (min-width: 321px) and (max-width: 480px) {
   .conversationPanel {
-    width: calc(100vw - 55px);
+    width: 100vw;
     height: 100vh;
-    position: relative;
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
   }
 
   .conversationHeader {
@@ -360,6 +408,7 @@
 
   .contactInfo {
     flex: 1;
+    min-width: 0;
   }
 
   .avatar {
@@ -371,6 +420,9 @@
 
   .contactDetails h3 {
     font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .status {
@@ -445,9 +497,13 @@
 /*--*/
 @media (min-width: 481px) and (max-width: 768px) {
   .conversationPanel {
-    width: calc(100vw - 60px);
+    width: 100vw;
     height: 100vh;
-    position: relative;
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
   }
 
   .conversationHeader {
@@ -457,6 +513,7 @@
 
   .contactInfo {
     flex: 1;
+    min-width: 0;
   }
 
   .avatar {
@@ -468,6 +525,9 @@
 
   .contactDetails h3 {
     font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .status {
@@ -544,8 +604,14 @@
   .conversationPanel {
     flex: 1;
     max-width: none;
-    width: calc(100vw - 350px);
-    margin-left: auto;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .leftFranja,
+  .rightFranja {
+    width: 10%;
+    min-width: 80px;
   }
 
   .searchContainer {
@@ -556,7 +622,15 @@
 /*--*/
 @media (min-width: 1025px) {
   .conversationPanel {
-    max-width: calc(100vw - 460px);
+    flex: 1;
+    max-width: none;
+    width: 100%;
+  }
+
+  .leftFranja,
+  .rightFranja {
+    width: 15%;
+    min-width: 100px;
   }
 
   .searchContainer {

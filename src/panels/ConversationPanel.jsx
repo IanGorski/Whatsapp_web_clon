@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './ConversationPanel.module.css';
 import MessageList from '../ui/MessageList';
 import MessageComposer from '../ui/MessageComposer';
@@ -8,12 +9,21 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useAppContext } from '../context/AppContext';
 
 const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage }) => {
+  const navigate = useNavigate();
+  const { isMobile, handleDeselectContact } = useAppContext();
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
   const [totalMatches, setTotalMatches] = useState(0);
+
+  const handleBackClick = () => {
+    handleDeselectContact();
+    navigate('/chats');
+  };
 
   const handleSendMessage = (messageContent) => {
     const newMessage = {
@@ -77,15 +87,15 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
     return activeConversation?.messages || [];
   };
 
-  // ALERT para iconos sin funcionalidad
+  // STUB: Funcionalidad pendiente de implementación
   const handleIconClick = () => {
-    alert('Este icono tampoco tiene funcionalidad jeje');
+    // TODO: Implementar funcionalidad de llamada/videollamada
   };
 
   if (!activeConversation) {
     return (
       <div className={styles.conversationPanel}>
-        <div className={styles.leftFranja}></div>
+        {!isMobile && <div className={styles.leftFranja}></div>}
         <div className={styles.chatSection}>
           <div className={styles.emptyState}>
             <h3>WhatsApp para Windows</h3>
@@ -93,19 +103,32 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
             <p>Usa Whatsapp en hasta 4 dispositivos vinculados y 1 teléfono a la vez.</p>
           </div>
         </div>
-        <div className={styles.rightFranja}></div>
+        {!isMobile && <div className={styles.rightFranja}></div>}
       </div>
     );
   }
 
   return (
     <div className={styles.conversationPanel}>
-      <div className={styles.leftFranja}></div>
+      {!isMobile && <div className={styles.leftFranja}></div>}
       <div className={styles.chatSection}>
         <div className={styles.conversationHeader}>
+        {isMobile && (
+          <button 
+            className={styles.backButton}
+            onClick={handleBackClick}
+            title="Volver a chats"
+          >
+            <ArrowBackIcon sx={{ fontSize: 24 }} />
+          </button>
+        )}
         <div className={styles.contactInfo}>
           <div className={styles.avatar}>
-            {activeConversation.name[0]}
+            {activeConversation.avatar ? (
+              <img src={activeConversation.avatar} alt={activeConversation.name} className={styles.avatarImage} />
+            ) : (
+              activeConversation.name[0]
+            )}
           </div>
           <div className={styles.contactDetails}>
             <h3>{activeConversation.name}</h3>
@@ -182,6 +205,7 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
         searchTerm={searchTerm}
         currentMatchIndex={currentMatchIndex}
         onDeleteMessage={onDeleteMessage}
+        activeConversation={activeConversation}
       />
       {/* Mostrar último mensaje si no hay mensajes */}
       {getMessagesToShow().length === 0 && (
@@ -194,7 +218,7 @@ const ConversationPanel = ({ activeConversation, onSendMessage, onDeleteMessage 
         conversationId={activeConversation?.id}
       />
       </div>
-      <div className={styles.rightFranja}></div>
+      {!isMobile && <div className={styles.rightFranja}></div>}
     </div>
   );
 };
