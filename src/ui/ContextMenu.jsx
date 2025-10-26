@@ -28,11 +28,22 @@ const ContextMenu = ({ isOpen, position, options, onClose, showSubmenu }) => {
   const adjustedPosition = { ...position };
   if (menuRef.current) {
     const rect = menuRef.current.getBoundingClientRect();
+    const margin = 10;
+    
+    // Ajustar en el eje X
     if (rect.right > window.innerWidth) {
-      adjustedPosition.x = window.innerWidth - rect.width - 10;
+      adjustedPosition.x = Math.max(margin, window.innerWidth - rect.width - margin);
     }
+    if (adjustedPosition.x < margin) {
+      adjustedPosition.x = margin;
+    }
+    
+    // Ajustar en el eje Y
     if (rect.bottom > window.innerHeight) {
-      adjustedPosition.y = window.innerHeight - rect.height - 10;
+      adjustedPosition.y = Math.max(margin, window.innerHeight - rect.height - margin);
+    }
+    if (adjustedPosition.y < margin) {
+      adjustedPosition.y = margin;
     }
   }
 
