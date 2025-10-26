@@ -6,7 +6,6 @@ import ContextMenu from './ContextMenu';
 import ConfirmDialog from './ConfirmDialog';
 import { useAppContext } from '../context/AppContext';
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -15,6 +14,8 @@ const UserCard = ({ user, onClick, isChat = false, disableContextMenu = false })
   const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
   const [showSubmenu, setShowSubmenu] = useState(null);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, type: null });
+  const [touchTimer, setTouchTimer] = useState(null);
+  const [touchStartPos, setTouchStartPos] = useState({ x: 0, y: 0 });
   
   const {
     handleMuteConversation,
@@ -24,7 +25,6 @@ const UserCard = ({ user, onClick, isChat = false, disableContextMenu = false })
     handleArchiveConversation,
     handleDeleteConversation,
     handleClearConversation,
-    handleToggleFavorite,
     markAsUnread,
     markAsRead,
   } = useAppContext();
@@ -40,9 +40,48 @@ const UserCard = ({ user, onClick, isChat = false, disableContextMenu = false })
     });
   };
 
+  const handleTouchStart = (e) => {
+    if (!isChat || disableContextMenu) return;
+    
+    const touch = e.touches[0];
+    setTouchStartPos({ x: touch.clientX, y: touch.clientY });
+    
+    const timer = setTimeout(() => {
+      // Mostrar menú contextual después de 500ms
+      e.preventDefault();
+      setContextMenu({
+        isOpen: true,
+        x: touch.clientX,
+        y: touch.clientY,
+      });
+    }, 500);
+    
+    setTouchTimer(timer);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchTimer) {
+      clearTimeout(touchTimer);
+      setTouchTimer(null);
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (touchTimer) {
+      const touch = e.touches[0];
+      const dx = Math.abs(touch.clientX - touchStartPos.x);
+      const dy = Math.abs(touch.clientY - touchStartPos.y);
+      
+      // Si se mueve más de 10px, cancelar el menú contextual
+      if (dx > 10 || dy > 10) {
+        clearTimeout(touchTimer);
+        setTouchTimer(null);
+      }
+    }
+  };
+
   const isMuted = user?.muteUntil !== undefined;
   const isPinned = user?.isPinned;
-  const isFavorite = user?.isFavorite;
 
   const getMuteText = () => {
     if (!isMuted) return null;
@@ -88,11 +127,6 @@ const UserCard = ({ user, onClick, isChat = false, disableContextMenu = false })
           handlePinConversation(user.id);
         }
       },
-    },
-    {
-      label: isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos',
-      icon: <FavoriteIcon sx={{ fontSize: 18 }} />,
-      onClick: () => handleToggleFavorite(user.id),
     },
     {
       label: isMuted ? getMuteText() : 'Silenciar',
@@ -183,6 +217,9 @@ const UserCard = ({ user, onClick, isChat = false, disableContextMenu = false })
         className={styles.userCard} 
         onClick={handleCardClick}
         onContextMenu={handleContextMenu}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
       >
         <div className={styles.avatar}>
           {user?.avatar ? (
