@@ -1,10 +1,13 @@
 .leftPanel {
   width: 400px;
+  max-width: 400px;
+  min-width: 400px;
   background-color: #ffffff;
   border-right: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh; /* Altura dinámica del viewport para móviles */
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -113,8 +116,9 @@
 /*--*/
 @media (max-width: 320px) {
   .leftPanel {
-    width: calc(100vw - 50px);
+    width: 100vw;
     height: 100vh;
+    height: 100dvh;
     border-right: none;
     position: relative;
     z-index: 10;
@@ -147,14 +151,16 @@
   .contactsList {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
 /*--*/
 @media (min-width: 321px) and (max-width: 480px) {
   .leftPanel {
-    width: calc(100vw - 55px);
+    width: 100vw;
     height: 100vh;
+    height: 100dvh;
     border-right: none;
     position: relative;
     z-index: 10;
@@ -187,14 +193,16 @@
   .contactsList {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
 /*--*/
 @media (min-width: 481px) and (max-width: 768px) {
   .leftPanel {
-    width: calc(100vw - 60px);
+    width: 100vw;
     height: 100vh;
+    height: 100dvh;
     border-right: none;
     position: relative;
     z-index: 10;
@@ -227,6 +235,7 @@
   .contactsList {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -234,7 +243,8 @@
 @media (min-width: 769px) and (max-width: 1024px) {
   .leftPanel {
     width: 350px;
-    min-width: 320px;
+    max-width: 350px;
+    min-width: 350px;
   }
 
   .header {
@@ -251,7 +261,8 @@
 @media (min-width: 1025px) {
   .leftPanel {
     width: 400px;
-    min-width: 380px;
+    max-width: 400px;
+    min-width: 400px;
   }
 }
 

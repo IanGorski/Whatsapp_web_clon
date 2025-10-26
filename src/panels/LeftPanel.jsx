@@ -7,7 +7,7 @@ import { useAppContext } from '../context/AppContext';
 import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const LeftPanel = ({ onSelectContact, conversations = [] }) => {
+const LeftPanel = ({ conversations = [] }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const { handleSelectContact, isMobile } = useAppContext();
@@ -34,16 +34,10 @@ const LeftPanel = ({ onSelectContact, conversations = [] }) => {
   };
 
   const handleContactClick = (contact) => {
-    // Llamar a la función original para mantener compatibilidad
-    if (onSelectContact) {
-      onSelectContact(contact);
-    }
-    
-    // También actualizar el contexto
+    // Actualizar el contexto primero
     handleSelectContact(contact);
     
-    // En desktop: navegar sin cambiar la vista (mantiene ambos paneles)
-    // En mobile: navegar y cambiar vista completa
+    // Navegar según el modo
     if (!isMobile) {
       // En desktop, actualizar URL pero mantener la misma página
       navigate(`/chat/${contact.id}`, { replace: true });
