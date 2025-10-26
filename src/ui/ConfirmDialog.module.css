@@ -18,6 +18,7 @@
     max-width: 500px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    margin: 20px;
 }
 
 .dialogHeader {
@@ -30,6 +31,7 @@
     font-size: 18px;
     font-weight: 500;
     color: #e9edef;
+    word-wrap: break-word;
 }
 
 .dialogBody {
@@ -41,6 +43,7 @@
     font-size: 14px;
     color: #aebac1;
     line-height: 1.5;
+    word-wrap: break-word;
 }
 
 .dialogFooter {
@@ -49,6 +52,7 @@
     gap: 12px;
     justify-content: flex-end;
     border-top: 1px solid #3c4043;
+    flex-wrap: wrap;
 }
 
 .button {
@@ -90,9 +94,73 @@
     background-color: #3c4144;
 }
 
+/* Media query para tablets y móviles */
 @media (max-width: 768px) {
     .dialog {
-        min-width: 300px;
-        max-width: 90%;
+        min-width: 280px;
+        max-width: 85vw;
+        margin: 16px;
+    }
+
+    .dialogHeader {
+        padding: 16px 20px 12px;
+    }
+
+    .dialogHeader h2 {
+        font-size: 16px;
+    }
+
+    .dialogBody {
+        padding: 16px 20px;
+    }
+
+    .dialogBody p {
+        font-size: 13px;
+    }
+
+    .dialogFooter {
+        padding: 12px 16px;
+        gap: 8px;
+        flex-direction: column-reverse;
+    }
+
+    .button {
+        width: 100%;
+        padding: 12px 20px;
+        justify-content: center;
+    }
+}
+
+/* Media query para móviles pequeños */
+@media (max-width: 480px) {
+    .dialog {
+        min-width: 260px;
+        max-width: 90vw;
+        margin: 12px;
+    }
+
+    .dialogHeader {
+        padding: 14px 16px 10px;
+    }
+
+    .dialogHeader h2 {
+        font-size: 15px;
+    }
+
+    .dialogBody {
+        padding: 14px 16px;
+    }
+
+    .dialogBody p {
+        font-size: 13px;
+    }
+
+    .dialogFooter {
+        padding: 10px 12px;
+    }
+
+    .button {
+        padding: 11px 18px;
+        font-size: 13px;
     }
 }
