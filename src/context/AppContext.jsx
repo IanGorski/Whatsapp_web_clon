@@ -209,6 +209,14 @@ export const AppProvider = ({ children }) => {
     }, []);
 
     const handleSelectContact = (contact) => {
+        // Evitar actualización innecesaria si ya es la conversación activa
+        if (activeConversation && activeConversation.id === contact.id) {
+            if (isMobile) {
+                setShowChatList(false);
+            }
+            return;
+        }
+        
         setActiveConversation(contact);
         if (isMobile) {
             setShowChatList(false);
@@ -454,12 +462,12 @@ export const AppProvider = ({ children }) => {
     };
 
     // Marcar como leído/no leído
-    const handleMarkAsUnread = (conversationId) => {
+    const handleToggleRead = (conversationId) => {
         const updatedConversations = conversations.map((conv) => {
             if (conv.id === conversationId) {
                 return {
                     ...conv,
-                    unreadCount: conv.unreadCount > 0 ? 0 : 1,
+                    isUnread: !conv.isUnread,
                 };
             }
             return conv;
@@ -470,29 +478,7 @@ export const AppProvider = ({ children }) => {
         if (activeConversation && activeConversation.id === conversationId) {
             setActiveConversation({ 
                 ...activeConversation, 
-                unreadCount: activeConversation.unreadCount > 0 ? 0 : 1 
-            });
-        }
-    };
-
-    // Añadir a favoritos
-    const handleToggleFavorite = (conversationId) => {
-        const updatedConversations = conversations.map((conv) => {
-            if (conv.id === conversationId) {
-                return {
-                    ...conv,
-                    isFavorite: !conv.isFavorite,
-                };
-            }
-            return conv;
-        });
-
-        setConversations(updatedConversations);
-        
-        if (activeConversation && activeConversation.id === conversationId) {
-            setActiveConversation({ 
-                ...activeConversation, 
-                isFavorite: !activeConversation.isFavorite 
+                isUnread: !activeConversation.isUnread 
             });
         }
     };
@@ -503,6 +489,10 @@ export const AppProvider = ({ children }) => {
                 chat.id === chatId ? { ...chat, isUnread: true } : chat
             )
         );
+        
+        if (activeConversation && activeConversation.id === chatId) {
+            setActiveConversation({ ...activeConversation, isUnread: true });
+        }
     };
 
     const markAsRead = (chatId) => {
@@ -511,6 +501,10 @@ export const AppProvider = ({ children }) => {
                 chat.id === chatId ? { ...chat, isUnread: false } : chat
             )
         );
+        
+        if (activeConversation && activeConversation.id === chatId) {
+            setActiveConversation({ ...activeConversation, isUnread: false });
+        }
     };
 
     const value = {
@@ -533,8 +527,7 @@ export const AppProvider = ({ children }) => {
         handleUnarchiveConversation,
         handleDeleteConversation,
         handleClearConversation,
-        handleMarkAsUnread,
-        handleToggleFavorite,
+        handleToggleRead,
         markAsUnread,
         markAsRead,
     };
