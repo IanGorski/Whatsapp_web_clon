@@ -18,12 +18,14 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import AddIcon from '@mui/icons-material/Add';
 
-const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, onDeleteMessage }) => {
+const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, onDeleteMessage, activeConversation }) => {
   const messageRefs = useRef({});
   const containerRef = useRef(null);
   const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0, message: null });
   const [showReactionBar, setShowReactionBar] = useState({ isOpen: false, x: 0, y: 0, messageId: null });
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, messageId: null });
+  const [touchTimer, setTouchTimer] = useState(null);
+  const [touchStartPos, setTouchStartPos] = useState(null);
   
   // Función para resaltar texto solo en el mensaje activo
   const highlightText = (text, search, isActiveMatch) => {
@@ -65,12 +67,55 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
     });
   };
 
+  // Manejar eventos táctiles para soporte móvil
+  const handleTouchStart = (e, message) => {
+    const touch = e.touches[0];
+    setTouchStartPos({ x: touch.clientX, y: touch.clientY });
+    
+    const timer = setTimeout(() => {
+      handleContextMenu({ 
+        preventDefault: () => {}, 
+        stopPropagation: () => {},
+        clientX: touch.clientX, 
+        clientY: touch.clientY 
+      }, message);
+    }, 500);
+    
+    setTouchTimer(timer);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchTimer) {
+      clearTimeout(touchTimer);
+      setTouchTimer(null);
+    }
+    setTouchStartPos(null);
+  };
+
+  const handleTouchMove = (e) => {
+    if (touchStartPos) {
+      const touch = e.touches[0];
+      const deltaX = Math.abs(touch.clientX - touchStartPos.x);
+      const deltaY = Math.abs(touch.clientY - touchStartPos.y);
+      
+      if (deltaX > 10 || deltaY > 10) {
+        if (touchTimer) {
+          clearTimeout(touchTimer);
+          setTouchTimer(null);
+        }
+        setTouchStartPos(null);
+      }
+    }
+  };
+
   // Opciones del menú contextual para mensajes propios
   const getOwnMessageOptions = (message) => [
     {
       label: 'Responder',
       icon: <ReplyIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Responder a mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar responder mensaje
+      },
     },
     {
       label: 'Copiar',
@@ -82,17 +127,23 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
     {
       label: 'Reenviar',
       icon: <ForwardIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Reenviar mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar reenviar mensaje
+      },
     },
     {
       label: 'Destacar',
       icon: <StarIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Destacar mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar destacar mensaje
+      },
     },
     {
       label: 'Fijar',
       icon: <PushPinIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Fijar mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar fijar mensaje
+      },
     },
     { divider: true },
     {
@@ -106,17 +157,23 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
     {
       label: 'Seleccionar',
       icon: <CheckBoxOutlineBlankIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Seleccionar mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar seleccionar mensaje
+      },
     },
     {
       label: 'Compartir',
       icon: <ShareIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Compartir mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar compartir mensaje
+      },
     },
     {
       label: 'Info.',
       icon: <InfoIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Info del mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar info del mensaje
+      },
     },
   ];
 
@@ -125,7 +182,9 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
     {
       label: 'Responder',
       icon: <ReplyIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Responder a mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar responder mensaje
+      },
     },
     {
       label: 'Copiar',
@@ -137,17 +196,23 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
     {
       label: 'Reenviar',
       icon: <ForwardIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Reenviar mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar reenviar mensaje
+      },
     },
     {
       label: 'Destacar',
       icon: <StarIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Destacar mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar destacar mensaje
+      },
     },
     {
       label: 'Fijar',
       icon: <PushPinIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Fijar mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar fijar mensaje
+      },
     },
     { divider: true },
     {
@@ -161,17 +226,23 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
     {
       label: 'Seleccionar',
       icon: <CheckBoxOutlineBlankIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Seleccionar mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar seleccionar mensaje
+      },
     },
     {
       label: 'Compartir',
       icon: <ShareIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Compartir mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar compartir mensaje
+      },
     },
     {
       label: 'Info.',
       icon: <InfoIcon sx={{ fontSize: 18 }} />,
-      onClick: () => console.log('Info del mensaje', message.id),
+      onClick: () => {
+        // TODO: Implementar info del mensaje
+      },
     },
   ];
 
@@ -203,6 +274,15 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
     }
   }, [searchTerm, currentMatchIndex, messages]);
 
+  // Cleanup para el timer táctil cuando el componente se desmonta
+  useEffect(() => {
+    return () => {
+      if (touchTimer) {
+        clearTimeout(touchTimer);
+      }
+    };
+  }, [touchTimer]);
+
   return (
     <div className={styles.messageList} ref={containerRef}>
       {messages.length === 0 ? (
@@ -222,7 +302,23 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
               ref={el => messageRefs.current[index] = el}
               className={`${styles.messageContainer} ${message.isOwn ? styles.ownMessage : styles.otherMessage}`}
               onContextMenu={(e) => handleContextMenu(e, message)}
+              onTouchStart={(e) => handleTouchStart(e, message)}
+              onTouchEnd={handleTouchEnd}
+              onTouchMove={handleTouchMove}
             >
+              {/* Avatar para mensajes recibidos */}
+              {!message.isOwn && activeConversation && (
+                <div className={styles.messageAvatar}>
+                  {activeConversation.avatar ? (
+                    <img src={activeConversation.avatar} alt={activeConversation.name} className={styles.avatarImage} />
+                  ) : (
+                    <div className={styles.avatarPlaceholder}>
+                      {activeConversation.name[0]}
+                    </div>
+                  )}
+                </div>
+              )}
+              
               {/* Barra de reacciones rápidas */}
               {showReactionBar.isOpen && showReactionBar.messageId === message.id && (
                 <div 
@@ -237,7 +333,7 @@ const MessageList = ({ messages = [], searchTerm = '', currentMatchIndex = 0, on
                       key={idx}
                       className={styles.reactionButton}
                       onClick={() => {
-                        console.log('Reacción:', reaction.label);
+                        // TODO: Implementar reacciones a mensajes
                         setShowReactionBar({ isOpen: false, x: 0, y: 0, messageId: null });
                       }}
                       title={reaction.label}

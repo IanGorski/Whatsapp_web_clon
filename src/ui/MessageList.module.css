@@ -190,8 +190,39 @@
 .messageContainer {
   display: flex;
   margin-bottom: 8px;
-  align-items: center;
+  align-items: flex-end;
   gap: 4px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.messageAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+.messageAvatar .avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.messageAvatar .avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: #00a884;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .ownMessage {
@@ -252,10 +283,28 @@
     gap: 3px;
     height: calc(100vh - 100px);
     overflow-x: hidden;
+    width: 100%;
+  }
+
+  .messageContainer {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .messageAvatar {
+    width: 24px;
+    height: 24px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    flex-shrink: 0;
+  }
+
+  .messageAvatar .avatarPlaceholder {
+    font-size: 10px;
   }
 
   .messageBubble {
-    max-width: 85%;
+    max-width: calc(100% - 30px);
     padding: 4px 8px 5px 8px;
     border-radius: 6px;
     font-size: 11px;
@@ -283,6 +332,7 @@
     background-color: #dcf8c6;
     margin-left: auto;
     margin-right: 3px;
+    max-width: calc(100% - 30px);
   }
 
   .receivedMessage {
@@ -290,6 +340,15 @@
     background-color: white;
     margin-left: 3px;
     margin-right: auto;
+    max-width: calc(100% - 30px);
+  }
+
+  .otherMessage {
+    width: 100%;
+  }
+
+  .ownMessage {
+    width: 100%;
   }
 
   .deleteButton {
@@ -331,10 +390,28 @@
     gap: 4px;
     height: calc(100vh - 110px);
     overflow-x: hidden;
+    width: 100%;
+  }
+
+  .messageContainer {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .messageAvatar {
+    width: 26px;
+    height: 26px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    flex-shrink: 0;
+  }
+
+  .messageAvatar .avatarPlaceholder {
+    font-size: 11px;
   }
 
   .messageBubble {
-    max-width: 80%;
+    max-width: calc(100% - 35px);
     padding: 5px 9px 6px 9px;
     border-radius: 7px;
     font-size: 12px;
@@ -362,6 +439,7 @@
     background-color: #dcf8c6;
     margin-left: auto;
     margin-right: 4px;
+    max-width: calc(100% - 35px);
   }
 
   .receivedMessage {
@@ -369,6 +447,15 @@
     background-color: white;
     margin-left: 4px;
     margin-right: auto;
+    max-width: calc(100% - 35px);
+  }
+
+  .otherMessage {
+    width: 100%;
+  }
+
+  .ownMessage {
+    width: 100%;
   }
 
   .deleteButton {
@@ -410,10 +497,28 @@
     gap: 5px;
     height: calc(100vh - 120px);
     overflow-x: hidden;
+    width: 100%;
+  }
+
+  .messageContainer {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .messageAvatar {
+    width: 28px;
+    height: 28px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+  }
+
+  .messageAvatar .avatarPlaceholder {
+    font-size: 12px;
   }
 
   .messageBubble {
-    max-width: 75%;
+    max-width: calc(100% - 40px);
     padding: 6px 10px 7px 10px;
     border-radius: 8px;
     font-size: 13px;
@@ -441,6 +546,7 @@
     background-color: #dcf8c6;
     margin-left: auto;
     margin-right: 5px;
+    max-width: calc(100% - 40px);
   }
 
   .receivedMessage {
@@ -448,6 +554,15 @@
     background-color: white;
     margin-left: 5px;
     margin-right: auto;
+    max-width: calc(100% - 40px);
+  }
+
+  .otherMessage {
+    width: 100%;
+  }
+
+  .ownMessage {
+    width: 100%;
   }
 
   .deleteButton {
