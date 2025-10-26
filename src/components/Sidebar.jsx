@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 import styles from "./Sidebar.module.css";
 import ChatIcon from '@mui/icons-material/Chat';
 import BarChartIcon from '@mui/icons-material/BarChart';
@@ -13,8 +14,13 @@ const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { handleDeselectContact } = useAppContext();
 
   const handleMenuClick = (path) => {
+    // Si es el icono de chats, deseleccionar el chat activo
+    if (path === "/chats") {
+      handleDeselectContact();
+    }
     navigate(path);
   };
 

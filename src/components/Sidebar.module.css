@@ -4,6 +4,7 @@
     top: 0;
     width: 60px;
     height: 100vh;
+    height: 100dvh; /* Altura dinámica del viewport para móviles */
     background-color: #2a2f32;
     border-right: 1px solid #3c4043;
     display: flex;
